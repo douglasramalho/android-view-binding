@@ -7,10 +7,8 @@ import br.com.douglasmotta.viewbinding.databinding.ItemNameBinding
 
 class MainAdapter(private val names: MutableList<String>) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    private lateinit var binding: ItemNameBinding
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        binding = ItemNameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemNameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainViewHolder(binding)
     }
 
