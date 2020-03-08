@@ -4,4 +4,5 @@
     <string name="activity_main_text_name_label">Nome:</string>
     <string name="activity_main_button_add_name">Adicionar nome</string>
     <string name="activity_main_button_clear_list">Limpar</string>
+    <string name="activity_main_error_label_empty_name">Campo obrigatório</string>
 </resources>

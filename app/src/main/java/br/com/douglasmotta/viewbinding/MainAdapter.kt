@@ -2,6 +2,7 @@ package br.com.douglasmotta.viewbinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import br.com.douglasmotta.viewbinding.databinding.ItemNameBinding
 
@@ -29,11 +30,15 @@ class MainAdapter(private val names: MutableList<String>) : RecyclerView.Adapter
         notifyItemRangeRemoved(0, itemCount)
     }
 
-    class MainViewHolder(binding: ItemNameBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MainViewHolder(val binding: ItemNameBinding) : RecyclerView.ViewHolder(binding.root) {
         private val textViewName = binding.itemNameValue
 
         fun bind(name: String) {
             textViewName.text = name
+
+            binding.root.setOnClickListener {
+                Toast.makeText(it.context, "Olá, $name", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

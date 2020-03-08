@@ -2,9 +2,12 @@ package br.com.douglasmotta.viewbinding
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import br.com.douglasmotta.viewbinding.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,20 +23,32 @@ class MainActivity : AppCompatActivity() {
 
         setMainAdapter()
 
-        binding.buttonDoAction.setOnClickListener {
-            addName(binding.inputName.text.toString())
-            hideKeyboard()
+        with(binding) {
+            buttonDoAction.setOnClickListener {
+                val name = inputName.text.toString()
+                if (name.isNotEmpty()) {
+                    addName(name)
+                    hideKeyboard()
+                } else {
+                    textNameValidationError.text = getString(R.string.activity_main_error_label_empty_name)
+                }
+            }
+
+            buttonClearList.setOnClickListener {
+                clearList()
+            }
+
+            inputName.setOnEditorActionListener { view, _, _ ->
+                addName(view.text.toString())
+                hideKeyboard()
+                true
+            }
+
+            inputName.addTextChangedListener {
+                textNameValidationError.text = ""
+            }
         }
 
-        binding.buttonClearList.setOnClickListener {
-            clearList()
-        }
-
-        binding.inputName.setOnEditorActionListener { view, _, _ ->
-            addName(view.text.toString())
-            hideKeyboard()
-            true
-        }
     }
 
     private fun setMainAdapter() {
